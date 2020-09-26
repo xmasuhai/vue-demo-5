@@ -1,21 +1,18 @@
 <template>
-<div>
-  Child1
-</div>
+<div>Child1</div>
 </template>
 
 <script>
-import log from '../mixins/log.js'
+import MyVue from "../MyVue.js";
 export default {
   data() {
     return {
-      name: "Child1"
-    }
+      name: "Child1",
+    };
   },
-  mixins: [log],
-}
+  extends: MyVue,
+};
 </script>
 
 <style scoped>
-
 </style>
