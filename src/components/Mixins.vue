@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import Child1 from './Child1.vue'
-import Child2 from './Child2.vue'
-import Child3 from './Child3.vue'
-import Child4 from './Child4.vue'
-import Child5 from './Child5.vue'
+import Child1 from "./Child1.vue";
+import Child2 from "./Child2.vue";
+import Child3 from "./Child3.vue";
+import Child4 from "./Child4.vue";
+import Child5 from "./Child5.vue";
 export default {
   name: "Mixins",
   components: {
@@ -36,14 +36,11 @@ export default {
       child3Visible: true,
       child4Visible: true,
       child5Visible: true,
-    }
+    };
   },
-  methods: {
-
-  }
-}
+  methods: {},
+};
 </script>
 
 <style scoped>
-
 </style>
