@@ -27,40 +27,31 @@ new Vue({
 // JS Router http://localhost:8080/#1
 /* 获取用户取得的地址 */
 console.log(`-------------------`)
-let hashNumber = window.location.hash.substr(1) || "1"
+
+function route() {
 // 获取界面
-let div = document.querySelector(`#div${hashNumber}`)
-let app = document.querySelector("#showRouter")
+  let hashNumber = window.location.hash.substr(1) || '1'
+  let app = document.querySelector('#showRouter')
+  let div = document.querySelector(`#div${hashNumber}`)
 // 渲染页面
-if (div) {
-  div.style.display = 'block'
-}else{
-  div = document.querySelector('#div404')
-  div.style.display = 'block'
-}
+  if (!div) {
+    div = document.querySelector('#div404')
+  }
+// 判断并清除原来的节点
+  if (app.children.length > 0){
+    app.children[0].style.display = "none"
+    document.querySelector('#originJsRouter').appendChild(app.children[0])
+  }
+
 // 展示内容
-if (app) app.appendChild(div)
+  div.style.display = 'block'
+  app.appendChild(div)
+}
+
+route()
 
 /* 监听hash变化 */
 window.addEventListener('hashchange', () => {
   console.log("hash变了")
-
-  const hashNumber2 = window.location.hash.substr(1)
-
-  // 获取界面
-  let div2 = document.querySelector(`#div${hashNumber2}`)
-  let app2 = document.querySelector("#showRouter")
-// 渲染页面
-  if (div2) {
-    div2.style.display = 'block'
-  }else{
-    div2 = document.querySelector('#div404')
-    div2.style.display = 'block'
-  }
-  // 先将容器中清空
-  console.log(app2);
-  app2.children[0].style.display = "none"
-  // 展示内容
-  document.body.appendChild(app2.children[0])
-  app2.appendChild(div2)
+  route()
 })
