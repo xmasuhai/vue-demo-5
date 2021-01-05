@@ -8,10 +8,12 @@
       <a href="#3"> link#3 </a>
       <a href="#4"> link#4 </a>
       <div id="showRouter"></div>
+      <!--
       <div id="div1" class="showNone">1</div>
       <div id="div2" class="showNone">2</div>
       <div id="div3" class="showNone">3</div>
       <div id="div4" class="showNone">4</div>
+      -->
       <div id="div404" class="showNone">#404</div>
     </div>
     <br />
