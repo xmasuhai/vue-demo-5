@@ -1,32 +1,36 @@
 <template>
   <div id="router">
-    <h2>原生JS</h2>
+    <h3>原生JS模拟router原理</h3>
     <br />
-    <div id="originJsRouter">
-      <a href="#1"> link#1 </a>
-      <a href="#2"> link#2 </a>
-      <a href="#3"> link#3 </a>
-      <a href="#4"> link#4 </a>
-      <div id="showRouter"></div>
-      <!--
-      <div id="div1" class="showNone">1</div>
-      <div id="div2" class="showNone">2</div>
-      <div id="div3" class="showNone">3</div>
-      <div id="div4" class="showNone">4</div>
-      -->
+    <h4>hash 模式</h4>
+    <div>
+      <a class="link" href="#1"> link#1 </a>
+      <a class="link" href="#2"> link#2 </a>
+      <a class="link" href="#3"> link#3 </a>
+      <a class="link" href="#4"> link#4 </a>
+      <div id="showRouter_hash"></div>
       <div id="div404" class="showNone">#404</div>
     </div>
     <br />
     <hr />
-    <h2>hash 模式</h2>
+    <h4>history 模式</h4>
+    <div>
+      <a class="link" href="/1"> link/1 </a>
+      <a class="link" href="/2"> link/2 </a>
+      <a class="link" href="/3"> link/3 </a>
+      <a class="link" href="/4"> link/4 </a>
+      <div id="showRouter_history"></div>
+    </div>
     <br />
     <hr />
-    <h2>history 模式</h2>
+    <h4>memory 模式</h4>
     <br />
     <hr />
-    <h2>memory 模式</h2>
+    <h4>嵌套路由</h4>
     <br />
     <hr />
+    <h3>vue router应用</h3>
+    <br />
   </div>
 </template>
 
@@ -37,62 +41,94 @@ export default {
   },
   methods: {},
   mounted: function () {
+    console.log(`-------------------`);
     // JS Router http://localhost:8080/#1
     /* 获取用户取得的地址 */
-    console.log(`-------------------`);
-
     // 路由表 哈希值：div节点对象
-    const createDiv = () => document.createElement("div");
-    const [div1, div2, div3, div4] = [
-      createDiv(),
-      createDiv(),
-      createDiv(),
-      createDiv(),
-    ];
-    [div1.innerHTML, div2.innerHTML, div3.innerHTML, div4.innerHTML] = [
-      "1",
-      "2",
-      "3",
-      "4",
-    ];
+    // fun("div1") ---> div1 div1.innerHTML "div1"
+    function createRouteNode(div_str) {
+      const hashName = {};
+      hashName[div_str] = document.createElement("div");
+      hashName[div_str].innerHTML = Object.keys(hashName)[0];
+      return hashName[div_str];
+    }
+
     const routeTable = {
-      1: div1,
-      2: div2,
-      3: div3,
-      4: div4,
+      1: createRouteNode("div1"),
+      2: createRouteNode("div2"),
+      3: createRouteNode("div3"),
+      4: createRouteNode("div4"),
+      "/1": createRouteNode("/div1"),
+      "/2": createRouteNode("/div2"),
+      "/3": createRouteNode("/div3"),
+      "/4": createRouteNode("/div4"),
+      "1/1": createRouteNode("div1/1"),
+      "1/2": createRouteNode("div1/2"),
+      "1/3": createRouteNode("div1/3"),
+      "1/4": createRouteNode("div1/4"),
     };
+    // 获取界面
+    const app = document.querySelector("#showRouter_hash");
+    const app2 = document.querySelector("#showRouter_history");
 
-    function route() {
-      // 获取界面
+    // 路由hash
+    function routHash(container) {
       let hashNumber = window.location.hash.substr(1) || "1";
-      let app = document.querySelector("#showRouter");
-      // let div = document.querySelector(`#div${hashNumber}`)
       let div = routeTable[hashNumber];
-
-      // 渲染页面
       if (!div) {
         div = document.querySelector("#div404");
       }
-      // 判断并清除原来的节点
-      /*
-    if (app.children.length > 0){
-      app.children[0].style.display = "none"
-      document.querySelector('#originJsRouter').appendChild(app.children[0])
-    }
-  */
-      app.innerHTML = "";
+      container.innerHTML = "";
       // 展示内容
       div.style.display = "block";
-      app.appendChild(div);
+      container.appendChild(div);
+    }
+    // 路由history
+    function routHistroy(container) {
+      let historyNumber = window.location.pathname[1] || "/1";
+      let div = routeTable[historyNumber];
+      if (!div) {
+        div = document.querySelector("#div404");
+      }
+      container.innerHTML = "";
+      // 展示内容
+      div.style.display = "block";
+      const cloneNode = div.cloneNode(true);
+      container.appendChild(cloneNode);
     }
 
-    route();
+    // 渲染函数
+    function render() {
+      routHash(app);
+      routHistroy(app2);
+      // 阻止a标签的默认动作
+      const allATags = document.querySelectorAll("a.link");
+      for (let a of allATags) {
+        a.addEventListener("click", (e) => {
+          const href = a.getAttribute("href");
+          e.preventDefault();
+          // console.log(href) // "#1"  // "/1"
+          window.history.pushState(null, `${href}`, href);
+          // 通知
+          if (window.location.hash.includes("#")) {
+            routHash(app);
+          } else {
+            routHistroy(app2);
+          }
+        });
+      }
+    }
+    // 渲染页面
+    render();
 
     /* 监听hash变化 */
+    /*
     window.addEventListener("hashchange", () => {
+      console.log(`-------------------`);
       console.log("hash变了");
-      route();
+      render();
     });
+    */
   },
 };
 </script>
