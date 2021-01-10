@@ -9,21 +9,27 @@
       <a class="link_hash" href="#3"> link#3 </a>
       <a class="link_hash" href="#4"> link#4 </a>
       <div id="routerView_hash"></div>
-      <div id="div404" class="showNone">#404</div>
     </div>
     <br />
     <hr />
     <h4>history 模式</h4>
     <div>
-      <a class="link_histtory" href="/1"> link/1 </a>
-      <a class="link_histtory" href="/2"> link/2 </a>
-      <a class="link_histtory" href="/3"> link/3 </a>
-      <a class="link_histtory" href="/4"> link/4 </a>
+      <a class="link_history" href="/1"> link/1 </a>
+      <a class="link_history" href="/2"> link/2 </a>
+      <a class="link_history" href="/3"> link/3 </a>
+      <a class="link_history" href="/4"> link/4 </a>
       <div id="routerView_history"></div>
     </div>
     <br />
     <hr />
     <h4>memory 模式</h4>
+    <div>
+      <a class="link_memory" href="m1"> linkM1 </a>
+      <a class="link_memory" href="m2"> linkM2 </a>
+      <a class="link_memory" href="m3"> linkM3 </a>
+      <a class="link_memory" href="m4"> linkM4 </a>
+      <div id="routerView_memory"></div>
+    </div>
     <br />
     <hr />
     <h4>嵌套路由</h4>
@@ -62,6 +68,10 @@ export default {
       "/2": createRouteNode("div/2"),
       "/3": createRouteNode("div/3"),
       "/4": createRouteNode("div/4"),
+      "m1": createRouteNode("divM1"),
+      "m2": createRouteNode("divM2"),
+      "m3": createRouteNode("divM3"),
+      "m4": createRouteNode("divM4"),
       "1/1": createRouteNode("div1/1"),
       "1/2": createRouteNode("div1/2"),
       "1/3": createRouteNode("div1/3"),
@@ -70,6 +80,7 @@ export default {
     // 获取界面
     const app = document.querySelector("#routerView_hash");
     const app2 = document.querySelector("#routerView_history");
+    const app3 = document.querySelector("#routerView_memory");
 
     // 路由函数
     function routeDiv(container, div) {
@@ -86,39 +97,43 @@ export default {
     }
     // 路由hash
     function routeHash(container) {
-      let hashNumber = window.location.hash.substr(1)
-      hashNumber === ""
-          ? hashNumber = "1"
-          : hashNumber = null;
+      let hashNumber = window.location.hash.substr(1);
+      hashNumber === "" ? (hashNumber = "1") : (hashNumber = null);
       let historyNumber = window.location.pathname;
-      historyNumber === "/"
-          ? historyNumber = null
-          : hashNumber = null;
+      historyNumber === "/" ? (historyNumber = null) : (hashNumber = null);
       let div = routeTable[hashNumber];
       routeDiv(container, div);
     }
     // 路由history
     function routeHistory(container) {
       let historyNumber = window.location.pathname;
-      historyNumber === "/"
-          ? (historyNumber = "/1")
-          : historyNumber;
-      let hashNumber = window.location.hash.substr(1)
-      hashNumber === ""
-          ? hashNumber = null
-          : historyNumber = null;
+      historyNumber === "/" ? (historyNumber = "/1") : historyNumber;
+      let hashNumber = window.location.hash.substr(1);
+      hashNumber === "" ? (hashNumber = null) : (historyNumber = null);
       let div = routeTable[historyNumber];
       routeDiv(container, div);
     }
+    // 路由memory
+    function routeMemory(container) {
+      let memoryNumber = window.localStorage.getItem("urlMemory")
+      if(!memoryNumber){
+        memoryNumber = "m1"
+      }
+      let div = routeTable[memoryNumber];
+      routeDiv(container, div);
+    }
 
-    // 渲染函数
+    // 初次渲染
     routeHash(app);
     routeHistory(app2);
+    routeMemory(app3)
 
     // 控制跳转
     function aJump() {
       const allHashA_Tags = document.querySelectorAll("a.link_hash");
-      const allHistoryA_Tags = document.querySelectorAll("a.link_histtory");
+      const allHistoryA_Tags = document.querySelectorAll("a.link_history");
+      const allMemoryA_Tags = document.querySelectorAll("a.link_memory");
+
       for (let a of allHashA_Tags) {
         a.addEventListener("click", () => {
           /* 监听hash变化 */
@@ -137,14 +152,17 @@ export default {
           routeHistory(app2);
         });
       }
+      for (let a of allMemoryA_Tags) {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          const href = a.getAttribute("href");
+          window.localStorage.setItem("urlMemory", href)
+          // 通知
+          routeMemory(app3);
+        });
+      }
     }
     aJump();
   },
 };
 </script>
-
-<style scoped>
-.showNone {
-  display: none;
-}
-</style>
