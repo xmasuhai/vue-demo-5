@@ -86,16 +86,27 @@ export default {
     }
     // 路由hash
     function routeHash(container) {
-      let hashNumber = window.location.hash.substr(1) || "1";
+      let hashNumber = window.location.hash.substr(1)
+      hashNumber === ""
+          ? hashNumber = "1"
+          : hashNumber = null;
+      let historyNumber = window.location.pathname;
+      historyNumber === "/"
+          ? historyNumber = null
+          : hashNumber = null;
       let div = routeTable[hashNumber];
       routeDiv(container, div);
     }
     // 路由history
     function routeHistory(container) {
-      let historyNumber;
-      window.location.pathname === "/"
-        ? (historyNumber = "/1")
-        : (historyNumber = window.location.pathname);
+      let historyNumber = window.location.pathname;
+      historyNumber === "/"
+          ? (historyNumber = "/1")
+          : historyNumber;
+      let hashNumber = window.location.hash.substr(1)
+      hashNumber === ""
+          ? hashNumber = null
+          : historyNumber = null;
       let div = routeTable[historyNumber];
       routeDiv(container, div);
     }
@@ -105,9 +116,9 @@ export default {
     routeHistory(app2);
 
     // 控制跳转
-    function ajump() {
+    function aJump() {
       const allHashA_Tags = document.querySelectorAll("a.link_hash");
-      const allHsitoryA_Tags = document.querySelectorAll("a.link_histtory");
+      const allHistoryA_Tags = document.querySelectorAll("a.link_histtory");
       for (let a of allHashA_Tags) {
         a.addEventListener("click", () => {
           /* 监听hash变化 */
@@ -116,7 +127,7 @@ export default {
           });
         });
       }
-      for (let a of allHsitoryA_Tags) {
+      for (let a of allHistoryA_Tags) {
         a.addEventListener("click", (e) => {
           const href = a.getAttribute("href");
           e.preventDefault(); // 阻止a标签的默认动作
@@ -127,7 +138,7 @@ export default {
         });
       }
     }
-    ajump();
+    aJump();
   },
 };
 </script>
