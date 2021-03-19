@@ -68,10 +68,10 @@ export default {
       "/2": createRouteNode("div/2"),
       "/3": createRouteNode("div/3"),
       "/4": createRouteNode("div/4"),
-      "m1": createRouteNode("divM1"),
-      "m2": createRouteNode("divM2"),
-      "m3": createRouteNode("divM3"),
-      "m4": createRouteNode("divM4"),
+      m1: createRouteNode("divM1"),
+      m2: createRouteNode("divM2"),
+      m3: createRouteNode("divM3"),
+      m4: createRouteNode("divM4"),
       "1/1": createRouteNode("div1/1"),
       "1/2": createRouteNode("div1/2"),
       "1/3": createRouteNode("div1/3"),
@@ -115,9 +115,9 @@ export default {
     }
     // 路由memory
     function routeMemory(container) {
-      let memoryNumber = window.localStorage.getItem("urlMemory")
-      if(!memoryNumber){
-        memoryNumber = "m1"
+      let memoryNumber = window.localStorage.getItem("urlMemory");
+      if (!memoryNumber) {
+        memoryNumber = "m1";
       }
       let div = routeTable[memoryNumber];
       routeDiv(container, div);
@@ -126,7 +126,7 @@ export default {
     // 初次渲染
     routeHash(app);
     routeHistory(app2);
-    routeMemory(app3)
+    routeMemory(app3);
 
     // 控制跳转
     function aJump() {
@@ -156,7 +156,7 @@ export default {
         a.addEventListener("click", (e) => {
           e.preventDefault();
           const href = a.getAttribute("href");
-          window.localStorage.setItem("urlMemory", href)
+          window.localStorage.setItem("urlMemory", href);
           // 通知
           routeMemory(app3);
         });

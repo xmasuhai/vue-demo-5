@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import 'ant-design-vue/dist/antd.css'
-import { Form } from 'ant-design-vue'
-
-Vue.use(Form)
 Vue.config.productionTip = false
 
 // 全局指令
