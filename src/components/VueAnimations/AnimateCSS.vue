@@ -1,24 +1,24 @@
 <template>
   <div>
-    <show-panel title="Animate.CSS"
-                transitionName="custom-classes-transition"
-                showText="Hello"></show-panel>
+    <button @click="showAnimateCSS = !showAnimateCSS">
+      Toggle
+    </button>
+    <transition enter-active-class="animated tada"
+                leave-active-class="animated bounceOutRight">
+      <p v-if="showAnimateCSS">hell O</p>
+    </transition>
   </div>
 </template>
 
 <script>
-import ShowPanel from '@/components/ShowPanel.vue'
 export default {
   data() {
     return {
+      showAnimateCSS: true
     }
-  },
-  components: {
-    ShowPanel
   }
 }
 </script>
 
 <style scoped>
-
 </style>

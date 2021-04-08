@@ -8,10 +8,10 @@
 
 <script>
 import ShowPanel from '@/components/ShowPanel.vue'
+
 export default {
   data() {
-    return {
-    }
+    return {}
   },
   components: {
     ShowPanel

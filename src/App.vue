@@ -1,5 +1,17 @@
 <template>
   <div id="app">
+    <button @click="showAnimateCSS = !showAnimateCSS">
+      Toggle
+    </button>
+  <transition
+    name="custom-classes-transition"
+    enter-active-class="animated tada"
+    leave-active-class="animated bounceOutRight"
+  >
+      <p v-if="showAnimateCSS">hell O</p>
+    </transition>
+
+
     <h1>Demo</h1>
     <!-- 之后用动态组件简化
     https://vue-docs-next-zh-cn.netlify.app/guide/component-basics.html#%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6
@@ -43,17 +55,6 @@
     <br/>
     <br/>
     <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
     <!-- -->
     <!--
     <h2>AntDesign</h2>
@@ -87,6 +88,11 @@ export default {
     VueAnimations,
     // VueAntDesign,
   },
+  data() {
+    return {
+      showAnimateCSS: true
+    }
+  }
 }
 </script>
 
