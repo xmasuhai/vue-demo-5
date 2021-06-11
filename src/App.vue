@@ -1,17 +1,5 @@
 <template>
   <div id="app">
-    <button @click="showAnimateCSS = !showAnimateCSS">
-      Toggle
-    </button>
-  <transition
-    name="custom-classes-transition"
-    enter-active-class="animated tada"
-    leave-active-class="animated bounceOutRight"
-  >
-      <p v-if="showAnimateCSS">hell O</p>
-    </transition>
-
-
     <h1>Demo</h1>
     <!-- 之后用动态组件简化
     https://vue-docs-next-zh-cn.netlify.app/guide/component-basics.html#%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6
@@ -50,6 +38,15 @@
     <VueAnimations/>
     <hr/>
     <br/>
+    <button @click="showAnimateCSS = !showAnimateCSS">
+      Toggle
+    </button>
+    <transition name="custom-classes-transition"
+                enter-active-class="animated tada"
+                leave-active-class="animated bounceOutRight">
+      <p v-if="showAnimateCSS">hell O</p>
+    </transition>
+
     <br/>
     <br/>
     <br/>
@@ -72,7 +69,7 @@ import Directives from './components/vueDirectives/Directives.vue'
 import Mixins from './components/vueMixins/Mixins.vue'
 import Extends from './components/vueExtends/Extends.vue'
 import ProvideInject from './components/vueProvideInject/ProvideInject.vue'
-import VueModel from './components/vueModel/VueModel.vue'
+import VueModel from './components/vueModels/VueModel.vue'
 import VueRouter from './components/vueRouter/VueRouter.vue'
 import VueAnimations from './components/vueAnimations/VueAnimations.vue'
 
