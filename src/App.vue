@@ -31,13 +31,13 @@
     <hr/>
     <br/>
     <!-- -->
-    <h2>Provide_Inject</h2>
-    <Provide_Inject/>
+    <h2>ProvideInject</h2>
+    <ProvideInject/>
     <hr/>
     <br/>
     <!-- -->
-    <h2>V_model</h2>
-    <V_model/>
+    <h2>VueModel</h2>
+    <VueModel/>
     <hr/>
     <br/>
     <!-- -->
@@ -68,13 +68,13 @@
 </template>
 
 <script>
-import Directives from './components/Directives.vue'
-import Mixins from './components/Mixins.vue'
-import Extends from './components/Extends.vue'
-import Provide_Inject from './components/Provide-Inject.vue'
-import V_model from './components/V-model.vue'
-import VueRouter from './components/VueRouter.vue'
-import VueAnimations from './components/VueAnimations.vue'
+import Directives from './components/vueDirectives/Directives.vue'
+import Mixins from './components/vueMixins/Mixins.vue'
+import Extends from './components/vueExtends/Extends.vue'
+import ProvideInject from './components/vueProvideInject/ProvideInject.vue'
+import VueModel from './components/vueModel/VueModel.vue'
+import VueRouter from './components/vueRouter/VueRouter.vue'
+import VueAnimations from './components/vueAnimations/VueAnimations.vue'
 
 export default {
   name: 'App',
@@ -82,8 +82,8 @@ export default {
     Directives,
     Mixins,
     Extends,
-    Provide_Inject,
-    V_model,
+    ProvideInject,
+    VueModel,
     VueRouter,
     VueAnimations,
     // VueAntDesign,

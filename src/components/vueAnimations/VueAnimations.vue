@@ -51,9 +51,9 @@
 </template>
 
 <script>
-import TransitionCSS from '@/components/VueAnimations/TransitionCSS.vue'
-import Slide from '@/components/VueAnimations/Slide.vue'
-import AnimateCSS from '@/components/VueAnimations/AnimateCSS.vue'
+import TransitionCSS from '@/components/vueAnimations/TransitionCSS.vue'
+import Slide from '@/components/vueAnimations/Slide.vue'
+import AnimateCSS from '@/components/vueAnimations/AnimateCSS.vue'
 
 export default {
   components: {

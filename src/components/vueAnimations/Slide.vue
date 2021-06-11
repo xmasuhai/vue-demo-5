@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ShowPanel from '@/components/ShowPanel.vue'
+import ShowPanel from '@/components/vueAnimations/ShowPanel.vue'
 export default {
   data() {
     return {};
